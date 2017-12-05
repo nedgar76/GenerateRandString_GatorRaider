@@ -7,36 +7,38 @@ import game.models.Node;
 
 import java.util.List;
 
-public final class StudentController implements DefenderController
-{
-	private int currLevel;
-	private List<Node> powerPillLocs;
+public final class StudentController implements DefenderController {
+    private int currLevel;
+    private List<Node> powerPillLocs;
+    private boolean isVulnerable;
+    private boolean isTherePill;
 
-	public void init(Game game)
-	{
-		currLevel = game.getLevel();
-		powerPillLocs = game.getPowerPillList();
-	}
+    public void init(Game game) {
+        currLevel = game.getLevel();
+        powerPillLocs = game.getPowerPillList();
+        isVulnerable = false;
+        isTherePill = true;
 
-	public void shutdown(Game game) { }
+    }
 
-	public int[] update(Game game,long timeDue)
-	{
-		if (game.getLevel() != currLevel)
-		{
-			powerPillLocs = game.getPowerPillList();
-			currLevel = game.getLevel();
-		}
+    public void shutdown(Game game) {
+    }
 
-		int[] actions = new int[Game.NUM_DEFENDER];
-		List<Defender> enemies = game.getDefenders();
+    public int[] update(Game game, long timeDue) {
+        if (game.getLevel() != currLevel) {
+            powerPillLocs = game.getPowerPillList();
+            currLevel = game.getLevel();
+        }
 
-		for (int i = 0; i < 4; i++)
-		{
-			actions[i] = game.getDefender(i).getNextDir(powerPillLocs.get(i), true);
-		}
-		/*
+        int[] actions = new int[Game.NUM_DEFENDER];
+        List<Defender> enemies = game.getDefenders();
 
+        for (int i = 0; i < 4; i++) {
+            actions[i] = game.getDefender(i).getNextDir(powerPillLocs.get(i), true);
+        }
+
+
+        /*
 		//Chooses a random LEGAL action if required. Could be much simpler by simply returning
 		//any random number of all of the ghosts
 		for(int i = 0; i < actions.length; i++)
@@ -48,7 +50,11 @@ public final class StudentController implements DefenderController
 			else
 				actions[i] = -1;
 		}
-		*/
-		return actions;
-	}
+
+
+
+	*/
+        return actions;
+
+    }
 }
