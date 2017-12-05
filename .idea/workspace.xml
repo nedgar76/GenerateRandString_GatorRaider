@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f93a5615-1996-447b-b12e-b95e14866fc7" name="Default" comment="Initial commit - added some test power pill seeker behavior">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="f93a5615-1996-447b-b12e-b95e14866fc7" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ufl/cs1/controllers/StudentController.java" afterPath="$PROJECT_DIR$/src/ufl/cs1/controllers/StudentController.java" />
     </list>
@@ -24,11 +23,21 @@
       <file leaf-file-name="StudentController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ufl/cs1/controllers/StudentController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="36" column="84" lean-forward="true" selection-start-line="36" selection-start-column="84" selection-end-line="36" selection-end-column="84" />
+            <state relative-caret-position="97">
+              <caret line="18" column="29" lean-forward="false" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_Game.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/System/game/system/_Game.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="358" column="23" lean-forward="false" selection-start-line="358" selection-start-column="21" selection-end-line="358" selection-end-column="23" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -188,6 +197,60 @@
       <pane id="ProjectPane">
         <subPane>
           <expand>
+            <path>
+              <item name="PakuPaku" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenerateRandString_GatorRaider" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PakuPaku" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenerateRandString_GatorRaider" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PakuPaku" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenerateRandString_GatorRaider" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PakuPaku" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenerateRandString_GatorRaider" type="462c0819:PsiDirectoryNode" />
+              <item name="System" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PakuPaku" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenerateRandString_GatorRaider" type="462c0819:PsiDirectoryNode" />
+              <item name="System" type="462c0819:PsiDirectoryNode" />
+              <item name="game" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PakuPaku" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenerateRandString_GatorRaider" type="462c0819:PsiDirectoryNode" />
+              <item name="System" type="462c0819:PsiDirectoryNode" />
+              <item name="game" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PakuPaku" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenerateRandString_GatorRaider" type="462c0819:PsiDirectoryNode" />
+              <item name="System" type="462c0819:PsiDirectoryNode" />
+              <item name="game" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PakuPaku" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenerateRandString_GatorRaider" type="462c0819:PsiDirectoryNode" />
+              <item name="System" type="462c0819:PsiDirectoryNode" />
+              <item name="game" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PakuPaku" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenerateRandString_GatorRaider" type="462c0819:PsiDirectoryNode" />
+              <item name="System" type="462c0819:PsiDirectoryNode" />
+              <item name="game" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+            </path>
             <path>
               <item name="PakuPaku" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
@@ -751,12 +814,20 @@
       <workItem from="1512341898271" duration="598000" />
       <workItem from="1512352311154" duration="2099000" />
       <workItem from="1512489407335" duration="528000" />
-      <workItem from="1512503605823" duration="584000" />
+      <workItem from="1512503605823" duration="830000" />
     </task>
+    <task id="LOCAL-00001" summary="Initial commit - added some test power pill seeker behavior">
+      <created>1512504197220</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1512504197220</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="149961000" />
+    <option name="totallyTimeSpent" value="150207000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="817" extended-state="0" />
@@ -911,6 +982,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="468">
           <caret line="132" column="44" lean-forward="true" selection-start-line="132" selection-start-column="44" selection-end-line="132" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1062,17 +1136,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/System/game/system/_Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/System/game/Exec.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="468">
           <caret line="132" column="44" lean-forward="true" selection-start-line="132" selection-start-column="44" selection-end-line="132" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1086,10 +1156,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/System/game/system/_Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="358" column="23" lean-forward="false" selection-start-line="358" selection-start-column="21" selection-end-line="358" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ufl/cs1/controllers/StudentController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" column="84" lean-forward="true" selection-start-line="36" selection-start-column="84" selection-end-line="36" selection-end-column="84" />
+        <state relative-caret-position="97">
+          <caret line="18" column="29" lean-forward="false" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

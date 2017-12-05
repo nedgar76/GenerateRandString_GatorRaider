@@ -17,7 +17,6 @@ public final class StudentController implements DefenderController {
         currLevel = game.getLevel();
         powerPillLocs = game.getPowerPillList();
         isVulnerable = false;
-        isTherePill = true;
 
     }
 
@@ -28,6 +27,7 @@ public final class StudentController implements DefenderController {
         if (game.getLevel() != currLevel) {
             powerPillLocs = game.getPowerPillList();
             currLevel = game.getLevel();
+            isVulnerable = false;
         }
 
         int[] actions = new int[Game.NUM_DEFENDER];
@@ -35,6 +35,7 @@ public final class StudentController implements DefenderController {
 
         for (int i = 0; i < 4; i++) {
             actions[i] = game.getDefender(i).getNextDir(powerPillLocs.get(i), true);
+
         }
 
 
