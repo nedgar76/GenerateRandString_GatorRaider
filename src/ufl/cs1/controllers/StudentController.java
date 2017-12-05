@@ -10,13 +10,14 @@ import java.util.List;
 public final class StudentController implements DefenderController {
     private int currLevel;
     private List<Node> powerPillLocs;
-    private boolean isVulnerable;
-    private boolean isTherePill;
+    Defender defender1;
+    Defender defender2;
+    Defender defender3;
+    Defender defender4;
 
     public void init(Game game) {
         currLevel = game.getLevel();
         powerPillLocs = game.getPowerPillList();
-        isVulnerable = false;
 
     }
 
@@ -27,7 +28,6 @@ public final class StudentController implements DefenderController {
         if (game.getLevel() != currLevel) {
             powerPillLocs = game.getPowerPillList();
             currLevel = game.getLevel();
-            isVulnerable = false;
         }
 
         int[] actions = new int[Game.NUM_DEFENDER];
