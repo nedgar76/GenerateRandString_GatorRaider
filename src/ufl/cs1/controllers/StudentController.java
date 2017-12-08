@@ -1,6 +1,7 @@
 package ufl.cs1.controllers;
 
 import game.controllers.DefenderController;
+import game.models.Attacker;
 import game.models.Defender;
 import game.models.Game;
 import game.models.Node;
@@ -9,27 +10,25 @@ import java.util.List;
 
 public final class StudentController implements DefenderController
 {
-    // constants
-    private static final int RED_GHOST_ID = 0;      // Chaser, 1st out
-    private static final int PINK_GHOST_ID = 1;     // Trapper, 2nd out
-    private static final int ORANGE_GHOST_ID = 2;   // Guard, 3rd out
-    private static final int BLUE_GHOST_ID = 3;     // Bait, 4th out
+    // behavior constants
+    private static final int MIN_FLEE_DISTANCE = 5;     // How close Pacman can be to a power pill before chasers start running
+    private static final int HOMING_DISTANCE = 4;       // How close Trapper gets before switching from predictive tracking to direct tracking
 
-    // variables
+    // ghost IDs
+    private static final int CHASER_ID = 0;      // Chaser, red, 1st out
+    private static final int TRAPPER_ID = 1;     // Trapper, pink, 2nd out
+    private static final int GUARD_ID = 2;   // Guard, orange, 3rd out
+    private static final int BAIT_ID = 3;     // Bait, blue, 4th out
+
+    // trackers
     private int currLevel = -1;     // first level is 0, so this forces updatePowerPillNodes at the start.
     private List<Node> powerPillNodes;
-    private Defender Chaser;
-    private Defender Trapper;
-    private Defender Guard;
-    private Defender Bait;
 
-    public void init(Game game)
-    {
-        Chaser = game.getDefender(RED_GHOST_ID);
-        Trapper = game.getDefender(PINK_GHOST_ID);
-        Guard = game.getDefender(ORANGE_GHOST_ID);
-        Bait = game.getDefender(BLUE_GHOST_ID);
-    }
+
+
+    /* GAME METHODS */
+
+    public void init(Game game) { }
 
     public void shutdown(Game game) { }
 
@@ -39,28 +38,29 @@ public final class StudentController implements DefenderController
 
         updatePowerPillNodes(game);
 
-        actions[RED_GHOST_ID] = getChaserBehavior(game);
-        actions[PINK_GHOST_ID] = getTrapperBehavior(game);
-        actions[ORANGE_GHOST_ID] = getGuardBehavior(game);
-        actions[BLUE_GHOST_ID] = getBaitBehavior(game);
+        actions[CHASER_ID] = getChaserBehavior(game);
+        actions[TRAPPER_ID] = getTrapperBehavior(game);
+        actions[GUARD_ID] = getGuardBehavior(game);
+        actions[BAIT_ID] = getBaitBehavior(game);
 
         return actions;
     }
 
-    private void updatePowerPillNodes(Game game)
-    {
-        if (game.getLevel() != currLevel) {
-            powerPillNodes = game.getPowerPillList();
-            currLevel = game.getLevel();
-        }
-    }
+
+
+    /* BEHAVIOR METHODS */
 
 	// Nathan
-	// TODO: Add description
+	// Description: Chases after Pacman, fleeing when he gets too close to a power pill node.
     private int getChaserBehavior(Game game)
 	{
-        // TODO: implement
-        return 0;
+	    Defender Chaser = game.getDefender(CHASER_ID);
+	    Attacker Pacman = game.getAttacker();
+
+	    int chaseDir = Chaser.getNextDir(Pacman.getLocation(), true);
+	    int fleeDir = Chaser.getNextDir(Pacman.getLocation(), false);
+
+	    return 0;
 	}
 
 	// Nathan
@@ -83,7 +83,35 @@ public final class StudentController implements DefenderController
 	// TODO: Add description
 	private int getBaitBehavior(Game game)
 	{
-        // TODO: implement
-        return 0;
+        Defender Bait = game.getDefender(BAIT_ID);
+        Attacker Pacman = game.getAttacker();
+
+        return Bait.getNextDir(Pacman.getLocation(), true);
 	}
+
+
+
+	/* UTILITY METHODS */
+
+	// When a new level is loaded, updates the power pill tracker to use the new nodes.
+    private void updatePowerPillNodes(Game game)
+    {
+        if (game.getLevel() != currLevel) {
+            powerPillNodes = game.getPowerPillList();
+            currLevel = game.getLevel();
+        }
+    }
+
+    // Returns how far Pacman is from the nearest power pill.
+    private int getMinDistanceToPowerPill(Game game)
+    {
+        Attacker Pacman = game.getAttacker();
+        int minDistance = 100;  // too large to accidentally become min
+
+        for (Node powerPill : powerPillNodes)
+            if (Pacman.getLocation().getPathDistance(powerPill) < minDistance)
+                minDistance = Pacman.getPathTo(powerPill).size();
+
+        return minDistance;
+    }
 }
