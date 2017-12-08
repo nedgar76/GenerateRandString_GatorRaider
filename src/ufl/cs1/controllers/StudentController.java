@@ -73,20 +73,25 @@ public final class StudentController implements DefenderController
 
 	// Tyler
 	// TODO: Add description
-	private int getGuardBehavior(Game game)
-	{
-        // TODO: implement
-        return 0;
-	}
-
-	// Ryan
-	// TODO: Add description
 	private int getBaitBehavior(Game game)
 	{
         Defender Bait = game.getDefender(BAIT_ID);
         Attacker Pacman = game.getAttacker();
 
         return Bait.getNextDir(Pacman.getLocation(), true);
+
+	}
+
+	// Ryan
+	// TODO: Add description
+	private int getGuardBehavior(Game game)
+	{
+	    Defender Guard = game.getDefender(GUARD_ID);
+
+
+
+
+
 	}
 
 
