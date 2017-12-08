@@ -7,55 +7,69 @@ import game.models.Node;
 
 import java.util.List;
 
-public final class StudentController implements DefenderController {
-    private int currLevel;
-    private List<Node> powerPillLocs;
-    private int numPowerPills;
 
 
-    public void init(Game game) {
-        currLevel = game.getLevel();
-        powerPillLocs = game.getPowerPillList();
-        numPowerPills = game.getCurMaze().getNumberPowerPills();
 
+public final class StudentController implements DefenderController
+{
+    private int currLevel = -1;     // first level is 0, so this forces updatePowerPillNodes at the start.
+    private List<Node> powerPillNodes;
+    Defender Chaser;
+    Defender Trapper;
+    Defender Guard;
+    Defender Bait;
+
+    public void init(Game game) { }
+
+    public void shutdown(Game game) { }
+
+    public int[] update(Game game, long timeDue)
+    {
+        int[] actions = new int[Game.NUM_DEFENDER];
+
+        updatePowerPillNodes(game);
+        // TODO: hookup behaviors
+
+        return actions;
     }
 
-    public void shutdown(Game game) {
-    }
-
-    public int[] update(Game game, long timeDue) {
+    private void updatePowerPillNodes(Game game)
+    {
         if (game.getLevel() != currLevel) {
-            powerPillLocs = game.getPowerPillList();
+            powerPillNodes = game.getPowerPillList();
             currLevel = game.getLevel();
         }
-
-        int[] actions = new int[Game.NUM_DEFENDER];
-        List<Defender> enemies = game.getDefenders();
-
-        for (int i = 0; i < 4; i++) {
-
-                actions[i] = game.getDefender(i).getNextDir(powerPillLocs.get(i), true);
-
-        }
-
-
-        /*
-		//Chooses a random LEGAL action if required. Could be much simpler by simply returning
-		//any random number of all of the ghosts
-		for(int i = 0; i < actions.length; i++)
-		{
-			Defender defender = enemies.get(i);
-			List<Integer> possibleDirs = defender.getPossibleDirs();
-			if (possibleDirs.size() != 0)
-				actions[i]=possibleDirs.get(Game.rng.nextInt(possibleDirs.size()));
-			else
-				actions[i] = -1;
-		}
-
-
-
-	*/
-        return actions;
-
     }
+
+	// Nathan
+	// TODO: Add description
+    public int getChaserBehavior()
+	{
+        // TODO: implement
+        return 0;
+	}
+
+	// Nathan
+	// TODO: Add description
+	public int getTrapperBehavior()
+	{
+	    // TODO: implement
+	    return 0;
+	}
+
+	// Tyler
+	// TODO: Add description
+	public int getGuardBehavior()
+	{
+        // TODO: implement
+        return 0;
+	}
+
+	// Ryan
+	// TODO: Add description
+	public int getBaitBehavior()
+	{
+        // TODO: implement
+        return 0;
+	}
 }
