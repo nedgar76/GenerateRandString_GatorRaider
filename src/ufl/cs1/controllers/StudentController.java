@@ -18,10 +18,10 @@ public final class StudentController implements DefenderController
     // variables
     private int currLevel = -1;     // first level is 0, so this forces updatePowerPillNodes at the start.
     private List<Node> powerPillNodes;
-    Defender Chaser;
-    Defender Trapper;
-    Defender Guard;
-    Defender Bait;
+    private Defender Chaser;
+    private Defender Trapper;
+    private Defender Guard;
+    private Defender Bait;
 
     public void init(Game game)
     {
@@ -57,7 +57,7 @@ public final class StudentController implements DefenderController
 
 	// Nathan
 	// TODO: Add description
-    public int getChaserBehavior(Game game)
+    private int getChaserBehavior(Game game)
 	{
         // TODO: implement
         return 0;
@@ -65,7 +65,7 @@ public final class StudentController implements DefenderController
 
 	// Nathan
 	// TODO: Add description
-	public int getTrapperBehavior(Game game)
+	private int getTrapperBehavior(Game game)
 	{
 	    // TODO: implement
 	    return 0;
@@ -73,7 +73,7 @@ public final class StudentController implements DefenderController
 
 	// Tyler
 	// TODO: Add description
-	public int getGuardBehavior(Game game)
+	private int getGuardBehavior(Game game)
 	{
         // TODO: implement
         return 0;
@@ -81,7 +81,7 @@ public final class StudentController implements DefenderController
 
 	// Ryan
 	// TODO: Add description
-	public int getBaitBehavior(Game game)
+	private int getBaitBehavior(Game game)
 	{
         // TODO: implement
         return 0;
