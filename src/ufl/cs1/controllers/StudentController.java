@@ -9,6 +9,13 @@ import java.util.List;
 
 public final class StudentController implements DefenderController
 {
+    // constants
+    private static final int RED_GHOST_ID = 0;      // Chaser, 1st out
+    private static final int PINK_GHOST_ID = 1;     // Trapper, 2nd out
+    private static final int ORANGE_GHOST_ID = 2;   // Guard, 3rd out
+    private static final int BLUE_GHOST_ID = 3;     // Bait, 4th out
+
+    // variables
     private int currLevel = -1;     // first level is 0, so this forces updatePowerPillNodes at the start.
     private List<Node> powerPillNodes;
     Defender Chaser;
@@ -16,7 +23,13 @@ public final class StudentController implements DefenderController
     Defender Guard;
     Defender Bait;
 
-    public void init(Game game) { }
+    public void init(Game game)
+    {
+        Chaser = game.getDefender(RED_GHOST_ID);
+        Trapper = game.getDefender(PINK_GHOST_ID);
+        Guard = game.getDefender(ORANGE_GHOST_ID);
+        Bait = game.getDefender(BLUE_GHOST_ID);
+    }
 
     public void shutdown(Game game) { }
 
@@ -25,7 +38,11 @@ public final class StudentController implements DefenderController
         int[] actions = new int[Game.NUM_DEFENDER];
 
         updatePowerPillNodes(game);
-        // TODO: hookup behaviors
+
+        actions[RED_GHOST_ID] = getChaserBehavior(game);
+        actions[PINK_GHOST_ID] = getTrapperBehavior(game);
+        actions[ORANGE_GHOST_ID] = getGuardBehavior(game);
+        actions[BLUE_GHOST_ID] = getBaitBehavior(game);
 
         return actions;
     }
@@ -40,7 +57,7 @@ public final class StudentController implements DefenderController
 
 	// Nathan
 	// TODO: Add description
-    public int getChaserBehavior()
+    public int getChaserBehavior(Game game)
 	{
         // TODO: implement
         return 0;
@@ -48,7 +65,7 @@ public final class StudentController implements DefenderController
 
 	// Nathan
 	// TODO: Add description
-	public int getTrapperBehavior()
+	public int getTrapperBehavior(Game game)
 	{
 	    // TODO: implement
 	    return 0;
@@ -56,7 +73,7 @@ public final class StudentController implements DefenderController
 
 	// Tyler
 	// TODO: Add description
-	public int getGuardBehavior()
+	public int getGuardBehavior(Game game)
 	{
         // TODO: implement
         return 0;
@@ -64,7 +81,7 @@ public final class StudentController implements DefenderController
 
 	// Ryan
 	// TODO: Add description
-	public int getBaitBehavior()
+	public int getBaitBehavior(Game game)
 	{
         // TODO: implement
         return 0;
