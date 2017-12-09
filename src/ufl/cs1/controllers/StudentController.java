@@ -97,8 +97,10 @@ public final class StudentController implements DefenderController
 	}
 
 	// Ryan
-	// Uses the getPacmanClosestPowerPill method to figure out
-    // which Power Pill Pacman is closest to and paths to it.
+	// As long as there is a power pill, the guard ghost
+    // will target the same pill that Pacman is targeting
+    // and path to it. If there aren't pills left, then the
+    // ghost will path to Pacman's location.
 	private int getGuardBehavior(Game game)
 	{
 	    Defender Guard = game.getDefender(GUARD_ID);
