@@ -51,12 +51,12 @@ public final class StudentController implements DefenderController
     /* BEHAVIOR METHODS */
 
 	// Nathan
-	// Description: Chases after Pacman, fleeing when he gets too close to a power pill node.
+	// Description: Chases after Pacman, fleeing when he gets too close to a power pill node OR when vulnerable.
     private int getChaserBehavior(Game game)
 	{
 	    Defender Chaser = game.getDefender(CHASER_ID);
 	    Attacker Pacman = game.getAttacker();
-	    boolean shouldApproach = true;
+	    boolean shouldApproach;
 
 	    if (Pacman.getLocation().getPathDistance(getPacmanClosestPowerPill(game)) > MIN_FLEE_DISTANCE)
 	        shouldApproach = true;
@@ -75,10 +75,14 @@ public final class StudentController implements DefenderController
 	}
 
 	// Nathan
-	// TODO: Add description
+	// Tries to predict Pacman's location, intercepting him along the way.
 	private int getTrapperBehavior(Game game)
 	{
-	    // TODO: implement
+        Defender Trapper = game.getDefender(CHASER_ID);
+        Attacker Pacman = game.getAttacker();
+
+	    if (Pacman.getLocation().getPathDistance(Trapper.getLocation()) > HOMING_DISTANCE)
+	        return 0;
 	    return 0;
 	}
 
@@ -125,12 +129,12 @@ public final class StudentController implements DefenderController
         int minDistance = 100;  // too large to accidentally become min
         Node closestNode = null;
 
-        for (int i = 0; i < powerPillNodes.size(); i++)
+        for (int i = 0; i < game.getPowerPillList().size(); i++)
         {
-            if (Pacman.getLocation().getPathDistance(powerPillNodes.get(i)) < minDistance)
+            if (Pacman.getLocation().getPathDistance(game.getPowerPillList().get(i)) < minDistance)
             {
-                minDistance = Pacman.getLocation().getPathDistance(powerPillNodes.get(i));
-                closestNode = powerPillNodes.get(i);
+                minDistance = Pacman.getLocation().getPathDistance(game.getPowerPillList().get(i));
+                closestNode = game.getPowerPillList().get(i);
             }
         }
 
