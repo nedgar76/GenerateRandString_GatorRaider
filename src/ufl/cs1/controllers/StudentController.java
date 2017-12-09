@@ -56,12 +56,15 @@ public final class StudentController implements DefenderController
 	{
 	    Defender Chaser = game.getDefender(CHASER_ID);
 	    Attacker Pacman = game.getAttacker();
-	    boolean shouldApproach;
+	    boolean shouldApproach = true;
 
 	    if (getMinDistanceToPowerPill(game) > MIN_FLEE_DISTANCE)
 	        shouldApproach = true;
 	    else
-	        shouldApproach = false;
+	        if (Pacman.getLocation().getPathDistance(Chaser.getLocation()) < getMaxVulnerableTime(game))
+	            shouldApproach = false;
+	        else
+	            shouldApproach = true;
 
 	    if (Pacman.getLocation().getPathDistance(Chaser.getLocation()) < Chaser.getVulnerableTime())
 	        shouldApproach = false;
@@ -124,5 +127,11 @@ public final class StudentController implements DefenderController
                 minDistance = Pacman.getPathTo(powerPill).size();
 
         return minDistance;
+    }
+
+    // Returns vulnerable time for this level.
+    private int getMaxVulnerableTime(Game game)
+    {
+        return (int) ( Game.VULNERABLE_TIME * Math.pow(Game.VULNERABLE_TIME_REDUCTION, game.getLevel()) );
     }
 }
