@@ -56,11 +56,17 @@ public final class StudentController implements DefenderController
 	{
 	    Defender Chaser = game.getDefender(CHASER_ID);
 	    Attacker Pacman = game.getAttacker();
+	    boolean shouldApproach;
 
-	    int chaseDir = Chaser.getNextDir(Pacman.getLocation(), true);
-	    int fleeDir = Chaser.getNextDir(Pacman.getLocation(), false);
+	    if (getMinDistanceToPowerPill(game) > MIN_FLEE_DISTANCE)
+	        shouldApproach = true;
+	    else
+	        shouldApproach = false;
 
-	    return 0;
+	    if (Pacman.getLocation().getPathDistance(Chaser.getLocation()) < Chaser.getVulnerableTime())
+	        shouldApproach = false;
+
+	    return Chaser.getNextDir(Pacman.getLocation(), shouldApproach);
 	}
 
 	// Nathan
@@ -91,7 +97,7 @@ public final class StudentController implements DefenderController
 
 
 
-
+	    return 0;
 	}
 
 
