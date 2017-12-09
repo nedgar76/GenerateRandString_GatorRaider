@@ -6,13 +6,15 @@ import game.models.Defender;
 import game.models.Game;
 import game.models.Node;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public final class StudentController implements DefenderController
 {
     // behavior constants
-    private static final int MIN_FLEE_DISTANCE = 5;     // How close Pacman can be to a power pill before chasers start running
-    private static final int HOMING_DISTANCE = 100;       // How close Trapper gets before switching from predictive tracking to direct tracking
+    private static final int CHASER_FLEE_DISTANCE = 20;     // How close Pacman can be to a power pill before chasers start running
+    private static final int HOMING_DISTANCE = 35;       // How close Trapper gets before switching from predictive tracking to direct tracking
 
     // ghost IDs
     private static final int CHASER_ID = 0;      // Chaser, red, 1st out
@@ -20,11 +22,7 @@ public final class StudentController implements DefenderController
     private static final int GUARD_ID = 2;   // Guard, orange, 3rd out
     private static final int BAIT_ID = 3;     // Bait, blue, 4th out
 
-    // trackers
-    private int currLevel = -1;     // first level is 0, so this forces updatePowerPillNodes at the start.
-    private List<Node> powerPillNodes;
-
-
+    boolean inHomingDistance = false;
 
     /* GAME METHODS */
 
@@ -35,8 +33,6 @@ public final class StudentController implements DefenderController
     public int[] update(Game game, long timeDue)
     {
         int[] actions = new int[Game.NUM_DEFENDER];
-
-        updatePowerPillNodes(game);
 
         actions[CHASER_ID] = getChaserBehavior(game);
         actions[TRAPPER_ID] = getTrapperBehavior(game);
@@ -56,34 +52,37 @@ public final class StudentController implements DefenderController
 	{
 	    Defender Chaser = game.getDefender(CHASER_ID);
 	    Attacker Pacman = game.getAttacker();
-	    boolean shouldApproach;
 
-	    if (Pacman.getLocation().getPathDistance(Pacman.getTargetNode(game.getPowerPillList(), true)) > MIN_FLEE_DISTANCE)
-	        shouldApproach = true;
-	    else
-        {
-            if (Pacman.getLocation().getPathDistance(Chaser.getLocation()) < getMaxVulnerableTime(game))
-                shouldApproach = false;
-            else
-                shouldApproach = true;
-        }
-
-	    if (Pacman.getLocation().getPathDistance(Chaser.getLocation()) < Chaser.getVulnerableTime())
-	        shouldApproach = false;
-
-	    return Chaser.getNextDir(Pacman.getLocation(), shouldApproach);
+	    return Chaser.getNextDir(Pacman.getLocation(), isSafeToTargetPacman(game, Chaser, CHASER_FLEE_DISTANCE));
 	}
 
 	// Nathan
-	// Tries to predict Pacman's location, intercepting him along the way.
+	// Tries to predict Pacman's future location, intercepting him along the way.
 	private int getTrapperBehavior(Game game)
 	{
-        Defender Trapper = game.getDefender(CHASER_ID);
+        Defender Trapper = game.getDefender(TRAPPER_ID);
         Attacker Pacman = game.getAttacker();
 
-	    if (Pacman.getLocation().getPathDistance(Trapper.getLocation()) > HOMING_DISTANCE)
-	        return 0;
-	    return 0;
+        int distanceToTrapper = Pacman.getLocation().getPathDistance(Trapper.getLocation());
+        List<Node> powerPillList = game.getPowerPillList();
+
+	    if (distanceToTrapper > HOMING_DISTANCE)
+        {
+            if (powerPillList.size() > 0)
+            {
+                Node closestPowerPill = Pacman.getTargetNode(game.getPowerPillList(), true);
+                return Trapper.getNextDir(closestPowerPill, isSafeToTargetPacman(game, Trapper, CHASER_FLEE_DISTANCE));
+            }
+            else
+            {
+                Node closestPill = Pacman.getTargetNode(game.getPillList(), true);
+                return Trapper.getNextDir(closestPill, isSafeToTargetPacman(game, Trapper, CHASER_FLEE_DISTANCE));
+            }
+        }
+        else
+        {
+            return Trapper.getNextDir(Pacman.getLocation(), isSafeToTargetPacman(game, Trapper, CHASER_FLEE_DISTANCE));
+        }
 	}
 
 	// Tyler
@@ -104,26 +103,41 @@ public final class StudentController implements DefenderController
 	{
 	    Defender Guard = game.getDefender(GUARD_ID);
 	    Attacker Pacman = game.getAttacker();
-        Node closestNode = Pacman.getTargetNode(powerPillNodes, true);
+        Node closestNode = Pacman.getTargetNode(game.getPowerPillList(), true);
 
-
-	    return Guard.getNextDir(closestNode, true);
+        if (closestNode != null)
+	        return Guard.getNextDir(closestNode, true);
+        else
+            return Guard.getNextDir(Pacman.getLocation(), true);
 	}
 
 
 
 	/* UTILITY METHODS */
 
-	// When a new level is loaded, updates the power pill tracker to use the new nodes.
-    private void updatePowerPillNodes(Game game)
+	private boolean isSafeToTargetPacman(Game game, Defender targeter, int fleeDistance)
     {
-        if (game.getLevel() != currLevel) {
-            powerPillNodes = game.getPowerPillList();
-            currLevel = game.getLevel();
+        Attacker Pacman = game.getAttacker();
+        boolean isSafe = true;
+
+        int distanceToTargeter = Pacman.getLocation().getPathDistance(targeter.getLocation());
+        List<Node> powerPillList = game.getPowerPillList();
+
+        if (powerPillList.size() > 0)
+        {
+            Node closestPowerPill = Pacman.getTargetNode(game.getPowerPillList(), true);
+
+            if (Pacman.getLocation().getPathDistance(closestPowerPill) < fleeDistance && distanceToTargeter < getMaxVulnerableTime(game))
+                isSafe = false;
         }
+
+        if (distanceToTargeter < targeter.getVulnerableTime())
+            isSafe = false;
+
+        return isSafe;
     }
 
-    // Returns vulnerable time for this level.
+    // Returns vulnerable time specific to this level.
     private int getMaxVulnerableTime(Game game)
     {
         return (int) ( Game.VULNERABLE_TIME * Math.pow(Game.VULNERABLE_TIME_REDUCTION, game.getLevel()) );
