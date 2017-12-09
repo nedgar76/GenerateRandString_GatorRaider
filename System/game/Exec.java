@@ -40,6 +40,8 @@ public class Exec
 				exec.runExperiment(attacker, studentDefender, 100, false);
 			else if (args[0].toLowerCase().equals("-visualexample"))
 				exec.runGame(attacker, exampleDefender, true, _Game.DELAY);
+			else if (args[0].toLowerCase().equals("-replay"))
+				exec.replayGame(".txt");
 			else
 				exec.runGame(attacker, studentDefender, true, _Game.DELAY);
 		}
@@ -105,6 +107,8 @@ public class Exec
 			attackerController.init(game.copy());
 			defenderController.init(game.copy());
 
+			String history = "";
+
 			while(!game.gameOver())
 			{
 				long due = _Game.DELAY;
@@ -120,10 +124,15 @@ public class Exec
 					}
 					writer.println("");
 				}
-		        game.advanceGame(attackerDirection, defenderDirections);
+
+		        int[] actions = game.advanceGame(attackerDirection, defenderDirections);
+				history = addActionsToString(history, actions);
+
 				tick++;
 			}
-			
+
+			Replay.saveActions(history, String.format("%d_trial_%d.txt", game.getScore(), i), false);
+
 			avgScore+=game.getScore();
 			attackerController.shutdown(game.copy());
 			defenderController.shutdown(game.copy());
