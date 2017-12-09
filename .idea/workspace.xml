@@ -23,8 +23,8 @@
       <file leaf-file-name="StudentController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ufl/cs1/controllers/StudentController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="36" column="21" lean-forward="true" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
+            <state relative-caret-position="325">
+              <caret line="122" column="5" lean-forward="false" selection-start-line="122" selection-start-column="5" selection-end-line="122" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -360,7 +360,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Example - Scored">
+  <component name="RunManager" selected="Application.TestAgent - Scored">
     <configuration name="Example - Debug" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="game.Exec" />
@@ -933,7 +933,14 @@
       <option name="project" value="LOCAL" />
       <updated>1512780652073</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Changes to power pill helper">
+      <created>1512781454179</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1512781454179</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1027,7 +1034,8 @@
     <MESSAGE value="Test chaser code" />
     <MESSAGE value="Added getMaxVulnerableTime, updated Chaser" />
     <MESSAGE value="Updated power pill helper method" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated power pill helper method" />
+    <MESSAGE value="Changes to power pill helper" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes to power pill helper" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1282,8 +1290,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ufl/cs1/controllers/StudentController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="36" column="21" lean-forward="true" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
+        <state relative-caret-position="325">
+          <caret line="122" column="5" lean-forward="false" selection-start-line="122" selection-start-column="5" selection-end-line="122" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
