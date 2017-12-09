@@ -58,13 +58,15 @@ public final class StudentController implements DefenderController
 	    Attacker Pacman = game.getAttacker();
 	    boolean shouldApproach = true;
 
-	    if (getMinDistanceToPowerPill(game) > MIN_FLEE_DISTANCE)
+	    if (Pacman.getLocation().getPathDistance(getPacmanClosestPowerPill(game)) > MIN_FLEE_DISTANCE)
 	        shouldApproach = true;
 	    else
-	        if (Pacman.getLocation().getPathDistance(Chaser.getLocation()) < getMaxVulnerableTime(game))
-	            shouldApproach = false;
-	        else
-	            shouldApproach = true;
+        {
+            if (Pacman.getLocation().getPathDistance(Chaser.getLocation()) < getMaxVulnerableTime(game))
+                shouldApproach = false;
+            else
+                shouldApproach = true;
+        }
 
 	    if (Pacman.getLocation().getPathDistance(Chaser.getLocation()) < Chaser.getVulnerableTime())
 	        shouldApproach = false;
@@ -117,16 +119,22 @@ public final class StudentController implements DefenderController
     }
 
     // Returns how far Pacman is from the nearest power pill.
-    private int getMinDistanceToPowerPill(Game game)
+    private Node getPacmanClosestPowerPill(Game game)
     {
         Attacker Pacman = game.getAttacker();
         int minDistance = 100;  // too large to accidentally become min
+        Node closestNode = null;
 
-        for (Node powerPill : powerPillNodes)
-            if (Pacman.getLocation().getPathDistance(powerPill) < minDistance)
-                minDistance = Pacman.getPathTo(powerPill).size();
+        for (int i = 0; i < powerPillNodes.size(); i++)
+        {
+            if (Pacman.getLocation().getPathDistance(powerPillNodes.get(i)) < minDistance)
+            {
+                minDistance = Pacman.getLocation().getPathDistance(powerPillNodes.get(i));
+                closestNode = powerPillNodes.get(i);
+            }
+        }
 
-        return minDistance;
+        return closestNode;
     }
 
     // Returns vulnerable time for this level.
