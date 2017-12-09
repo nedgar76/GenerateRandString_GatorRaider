@@ -12,7 +12,7 @@ public final class StudentController implements DefenderController
 {
     // behavior constants
     private static final int MIN_FLEE_DISTANCE = 5;     // How close Pacman can be to a power pill before chasers start running
-    private static final int HOMING_DISTANCE = 4;       // How close Trapper gets before switching from predictive tracking to direct tracking
+    private static final int HOMING_DISTANCE = 100;       // How close Trapper gets before switching from predictive tracking to direct tracking
 
     // ghost IDs
     private static final int CHASER_ID = 0;      // Chaser, red, 1st out
@@ -98,15 +98,16 @@ public final class StudentController implements DefenderController
 	}
 
 	// Ryan
-	// TODO: Add description
+	// Uses the getPacmanClosestPowerPill method to figure out
+    // which Power Pill Pacman is closest to and paths to it.
 	private int getGuardBehavior(Game game)
 	{
 	    Defender Guard = game.getDefender(GUARD_ID);
+	    Attacker Pacman = game.getAttacker();
+        Node closestNode = Pacman.getTargetNode(powerPillNodes, true);
 
 
-
-
-	    return 0;
+	    return Guard.getNextDir(closestNode, true);
 	}
 
 
